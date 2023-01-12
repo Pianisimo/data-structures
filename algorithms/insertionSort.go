@@ -1,6 +1,6 @@
-package main
+package algorithms
 
-func insertionSort(s []int) {
+func InsertionSort(s []int) {
 	for i := 0; i < len(s); i++ {
 		if s[i] < s[0] {
 			temp := s[0]

@@ -1,14 +1,14 @@
-package main
+package algorithms
 
 var calculations = 0
 
-func fibonachi(n int) int {
+func Fibonacci(n int) int {
 	calculations++
 	if n < 2 {
 		return n
 	}
 
-	return fibonachi(n-1) + fibonachi(n-2)
+	return Fibonacci(n-1) + Fibonacci(n-2)
 }
 
 /*

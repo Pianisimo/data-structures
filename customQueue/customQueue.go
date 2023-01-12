@@ -1,4 +1,4 @@
-package main
+package customQueue
 
 import (
 	"fmt"
@@ -7,12 +7,12 @@ import (
 type CustomQueue struct {
 	head   *Node
 	tail   *Node
-	length int
+	Length int
 }
 
-func newEmptyQueue() CustomQueue {
+func NewEmptyQueue() CustomQueue {
 	return CustomQueue{
-		length: 0,
+		Length: 0,
 	}
 }
 
@@ -26,20 +26,20 @@ func (q CustomQueue) Traverse() {
 
 func (q *CustomQueue) Append(value any) {
 	n := &Node{
-		value: value,
+		Value: value,
 		next:  nil,
 	}
 
 	if q.head == nil {
 		q.head = n
 		q.tail = n
-		q.length = 1
+		q.Length = 1
 		return
 	}
 
 	q.tail.next = n
 	q.tail = n
-	q.length++
+	q.Length++
 }
 
 func (q CustomQueue) Peek() Node {
@@ -61,17 +61,17 @@ func (q *CustomQueue) Dequeue() Node {
 	if q.head == nil {
 		q.tail = nil
 	}
-	q.length--
+	q.Length--
 	return *dequeued
 }
 
 type Node struct {
-	value any
+	Value any
 	next  *Node
 }
 
 func (n *Node) traverse() {
-	fmt.Println(n.value)
+	fmt.Println(n.Value)
 	if n.next != nil {
 		n.next.traverse()
 	}

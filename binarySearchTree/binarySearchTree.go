@@ -1,6 +1,7 @@
-package main
+package binarySearchTree
 
 import (
+	"data-structures/interfaces"
 	"fmt"
 	"strings"
 )
@@ -10,30 +11,35 @@ type BinarySearchTree struct {
 	Length int
 }
 
-func (b BinarySearchTree) String() string {
+func (b *BinarySearchTree) GetRoot() interfaces.Node {
+	return b.Root
+}
+
+func (b *BinarySearchTree) String() string {
 	return b.inOrderTraversal()
 }
 
-/*
-Also called BreadthDepthSearch and it's 3 forms.
-*/
-func (b BinarySearchTree) inOrderTraversal() string {
+// inOrderTraversal also known as BreadthDepthSearch, see inOrderTraversalByNode for it's 3 variants
+func (b *BinarySearchTree) inOrderTraversal() string {
 	sb := &strings.Builder{}
 	b.inOrderTraversalByNode(sb, b.Root)
 	return sb.String()
 }
 
-func (b BinarySearchTree) inOrderTraversalByNode(sb *strings.Builder, currentNode *Node) {
+// inOrderTraversalByNode move the expression [sb.WriteString(fmt.Sprintf("%s ", currentNode))]
+// to get a different variant of this method
+func (b *BinarySearchTree) inOrderTraversalByNode(sb *strings.Builder, currentNode *Node) {
 	if currentNode == nil {
 		return
 	}
-	// PreOrder -> sb.WriteString(fmt.Sprintf("%s ", currentNode)) here!
+	// PreOrder: sb.WriteString(fmt.Sprintf("%s ", currentNode))
 	b.inOrderTraversalByNode(sb, currentNode.Left)
 
-	// Ordered ->
-	sb.WriteString(fmt.Sprintf("%s ", currentNode))
+	// Ordered: sb.WriteString(fmt.Sprintf("%s ", currentNode))
+	sb.WriteString(fmt.Sprintf("%s ", currentNode)) // moving this will change variant
 	b.inOrderTraversalByNode(sb, currentNode.Right)
-	// PostOrder -> sb.WriteString(fmt.Sprintf("%s ", currentNode)) here!
+
+	// PostOrder: sb.WriteString(fmt.Sprintf("%s ", currentNode))
 }
 
 func (b *BinarySearchTree) Add(value int) {
@@ -59,11 +65,11 @@ func (b *BinarySearchTree) addByNode(currentNode *Node, value int) *Node {
 	return currentNode
 }
 
-func (b BinarySearchTree) Search(value int) (*Node, bool) {
+func (b *BinarySearchTree) Search(value int) (*Node, bool) {
 	return b.searchByNode(b.Root, value)
 }
 
-func (b BinarySearchTree) searchByNode(root *Node, value int) (*Node, bool) {
+func (b *BinarySearchTree) searchByNode(root *Node, value int) (*Node, bool) {
 	if root == nil {
 		return nil, false
 	}
@@ -109,7 +115,7 @@ func (b *BinarySearchTree) removeByNode(currentNode *Node, value int) *Node {
 	return currentNode
 }
 
-func (b BinarySearchTree) BreadthFirstSearch() []int {
+func (b *BinarySearchTree) BreadthFirstSearch() []int {
 	currentNode := b.Root
 	list := make([]int, 0)
 	queue := make([]*Node, 0)
@@ -132,14 +138,14 @@ func (b BinarySearchTree) BreadthFirstSearch() []int {
 	return list
 }
 
-func (b BinarySearchTree) BreadthFirstSearchRecursive() []int {
+func (b *BinarySearchTree) BreadthFirstSearchRecursive() []int {
 	list := make([]int, 0)
 	queue := []*Node{b.Root}
 	list = b.breadthFirstSearchRecursive(queue, list)
 	return list
 }
 
-func (b BinarySearchTree) breadthFirstSearchRecursive(queue []*Node, list []int) []int {
+func (b *BinarySearchTree) breadthFirstSearchRecursive(queue []*Node, list []int) []int {
 	if len(queue) == 0 {
 		return list
 	}

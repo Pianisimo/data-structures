@@ -1,6 +1,6 @@
-package main
+package algorithms
 
-func selectionSort(s []int) {
+func SelectionSort(s []int) {
 	for j := 0; j < len(s); j++ {
 		min := s[j]
 		index := j

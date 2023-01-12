@@ -1,4 +1,4 @@
-package main
+package customStack
 
 import (
 	"fmt"
@@ -7,12 +7,12 @@ import (
 type CustomStack struct {
 	head   *Node
 	tail   *Node
-	length int
+	Length int
 }
 
-func newCustomStack(value any) CustomStack {
+func NewCustomStack(value any) CustomStack {
 	node := &Node{
-		value: value,
+		Value: value,
 		next:  nil,
 		prev:  nil,
 	}
@@ -20,15 +20,15 @@ func newCustomStack(value any) CustomStack {
 	return CustomStack{
 		head:   node,
 		tail:   node,
-		length: 1,
+		Length: 1,
 	}
 }
 
-func newEmptyCustomStack() CustomStack {
+func NewEmptyCustomStack() CustomStack {
 	return CustomStack{
 		head:   nil,
 		tail:   nil,
-		length: 0,
+		Length: 0,
 	}
 }
 
@@ -42,7 +42,7 @@ func (c CustomStack) Traverse() {
 
 func (c *CustomStack) Push(value any) {
 	n := &Node{
-		value: value,
+		Value: value,
 		next:  nil,
 		prev:  c.tail,
 	}
@@ -50,13 +50,13 @@ func (c *CustomStack) Push(value any) {
 	if c.head == nil {
 		c.head = n
 		c.tail = n
-		c.length = 1
+		c.Length = 1
 		return
 	}
 
 	c.tail.next = n
 	c.tail = n
-	c.length++
+	c.Length++
 }
 
 func (c *CustomStack) Pop() Node {
@@ -70,7 +70,7 @@ func (c *CustomStack) Pop() Node {
 	if popped == c.head {
 		c.head = nil
 	}
-	c.length--
+	c.Length--
 	return *popped
 }
 
@@ -83,15 +83,14 @@ func (c CustomStack) Peek() Node {
 }
 
 type Node struct {
-	value any
+	Value any
 	next  *Node
 	prev  *Node
 }
 
 func (n *Node) traverse() {
-	fmt.Println(n.value)
+	fmt.Println(n.Value)
 	if n.next != nil {
 		n.next.traverse()
 	}
 }
-

@@ -1,4 +1,4 @@
-package main
+package linkedList
 
 import (
 	"errors"
@@ -11,7 +11,7 @@ type CustomLinkedList struct {
 	length int
 }
 
-func newCustomLinkedList(value any) CustomLinkedList {
+func NewCustomLinkedList(value any) CustomLinkedList {
 	node := &Node{
 		value: value,
 		next:  nil,
@@ -24,7 +24,7 @@ func newCustomLinkedList(value any) CustomLinkedList {
 	}
 }
 
-func newEmptyLinkedList() CustomLinkedList {
+func NewEmptyLinkedList() CustomLinkedList {
 	return CustomLinkedList{
 		head:   nil,
 		tail:   nil,
@@ -32,7 +32,7 @@ func newEmptyLinkedList() CustomLinkedList {
 	}
 }
 
-func (l CustomLinkedList) Traverse() {
+func (l *CustomLinkedList) Traverse() {
 	if l.head == nil {
 		return
 	}

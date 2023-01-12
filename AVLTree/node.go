@@ -1,24 +1,25 @@
-package main
+package AVLTree
 
 import (
+	"data-structures/interfaces"
 	"fmt"
 	"strconv"
 	"strings"
 )
 
-type node struct {
+type Node struct {
 	value  int
-	left   *node
-	right  *node
+	left   *Node
+	right  *Node
 	height int
 }
 
-func (n node) String() string {
+func (n *Node) String() string {
 	return strconv.Itoa(n.value)
 }
 
-func (n *node) insert(value int) *node {
-	newNode := &node{
+func (n *Node) insert(value int) *Node {
+	newNode := &Node{
 		value:  value,
 		left:   nil,
 		right:  nil,
@@ -46,7 +47,7 @@ func (n *node) insert(value int) *node {
 	return n
 }
 
-func (n node) traverse(sb *strings.Builder) {
+func (n *Node) traverse(sb *strings.Builder) {
 	if n.left != nil {
 		n.left.traverse(sb)
 	}
@@ -58,7 +59,7 @@ func (n node) traverse(sb *strings.Builder) {
 	}
 }
 
-func (n *node) getMax() *node {
+func (n *Node) getMax() *Node {
 	if n.right == nil {
 		return n
 	} else {
@@ -66,10 +67,34 @@ func (n *node) getMax() *node {
 	}
 }
 
-func (n *node) getMin() *node {
+func (n *Node) getMin() *Node {
 	if n.left == nil {
 		return n
 	} else {
 		return n.left.getMin()
 	}
+}
+
+func (n *Node) GetNode() interfaces.Node {
+	return n
+}
+
+func (n *Node) GetLeft() interfaces.Node {
+	if n.left == nil {
+		return nil
+	}
+
+	return n.left
+}
+
+func (n *Node) GetRight() interfaces.Node {
+	if n.right == nil {
+		return nil
+	}
+
+	return n.right
+}
+
+func (n *Node) GetValue() int {
+	return n.value
 }

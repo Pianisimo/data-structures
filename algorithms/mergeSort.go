@@ -1,6 +1,6 @@
-package main
+package algorithms
 
-func mergeSort(s []int) {
+func MergeSort(s []int) {
 	copy(s, recursiveMergeSort(s))
 }
 

@@ -1,14 +1,26 @@
-package main
+package AVLTree
+
+import (
+	"data-structures/interfaces"
+)
 
 type AVLTree struct {
-	Root *node
+	Root *Node
+}
+
+func (t *AVLTree) String() string {
+	return "implement me"
+}
+
+func (t *AVLTree) GetRoot() interfaces.Node {
+	return t.Root
 }
 
 func (t *AVLTree) Remove(value int) {
 	t.removeByNode(t.Root, value)
 }
 
-func (t *AVLTree) removeByNode(currentNode *node, value int) *node {
+func (t *AVLTree) removeByNode(currentNode *Node, value int) *Node {
 	if currentNode == nil {
 		return currentNode
 	}
@@ -19,7 +31,7 @@ func (t *AVLTree) removeByNode(currentNode *node, value int) *node {
 		currentNode.left = t.removeByNode(currentNode.left, value)
 	} else {
 		if currentNode.left == nil || currentNode.right == nil {
-			var temp *node
+			var temp *Node
 			if temp == currentNode.left {
 				temp = currentNode.right
 			} else {
@@ -68,9 +80,9 @@ func (t *AVLTree) Add(value int) {
 	t.Root = t.addByNode(value, t.Root)
 }
 
-func (t *AVLTree) addByNode(value int, currentNode *node) *node {
+func (t *AVLTree) addByNode(value int, currentNode *Node) *Node {
 	if currentNode == nil {
-		return &node{
+		return &Node{
 			value:  value,
 			height: 1,
 		}
@@ -102,7 +114,7 @@ func (t *AVLTree) addByNode(value int, currentNode *node) *node {
 	return currentNode
 }
 
-func (t *AVLTree) rotateRight(currentNode *node) *node {
+func (t *AVLTree) rotateRight(currentNode *Node) *Node {
 	n := currentNode.left
 	n2 := n.right
 	n.right = currentNode
@@ -113,7 +125,7 @@ func (t *AVLTree) rotateRight(currentNode *node) *node {
 	return n
 }
 
-func (t *AVLTree) rotateLeft(currentNode *node) *node {
+func (t *AVLTree) rotateLeft(currentNode *Node) *Node {
 	n := currentNode.right
 	n2 := n.left
 	n.left = currentNode
@@ -124,14 +136,14 @@ func (t *AVLTree) rotateLeft(currentNode *node) *node {
 	return n
 }
 
-func (t AVLTree) getNodeBalance(currentNode *node) int {
+func (t *AVLTree) getNodeBalance(currentNode *Node) int {
 	if currentNode == nil {
 		return 0
 	}
 	return t.getHeight(currentNode.left) - t.getHeight(currentNode.right)
 }
 
-func (t AVLTree) getHeight(currentNode *node) int {
+func (t *AVLTree) getHeight(currentNode *Node) int {
 	if currentNode == nil {
 		return 0
 	} else {

@@ -1,6 +1,6 @@
-package main
+package algorithms
 
-func bubblesSort(s []int) {
+func BubbleSort(s []int) {
 	for j := 0; j < len(s); j++ {
 		for i := 0; i < len(s)-1; i++ {
 			if s[i] > s[i+1] {
